@@ -1,4 +1,4 @@
-/Users/antontrunov/.opam/coq.8.8.2/bin/coq_makefile  -f Make -o Makefile.coq
+/Users/antontrunov/.opam/coq.local.2/bin/coq_makefile  -f Make -o Makefile.coq
 /Applications/Xcode.app/Contents/Developer/usr/bin/make -f Makefile.coq --no-print-directory
 COQDEP VFILES
 COQC ssreflect.v
@@ -10841,7 +10841,7 @@ COQC fingraph.v
   
   T : finType
   f : T -> T
-  S : predPredType T
+  S : pred_class
   f_in : {in S, forall x : T, f x \in S}
   injf : {in S &, injective f}
   ============================
@@ -10850,7 +10850,7 @@ COQC fingraph.v
   
   T : finType
   f : T -> T
-  S : predPredType T
+  S : pred_class
   f_in : {in S, forall x : T, f x \in S}
   injf : {in S &, injective f}
   ============================
@@ -10859,7 +10859,7 @@ COQC fingraph.v
   
   T : finType
   f : T -> T
-  S : predPredType T
+  S : pred_class
   f_in : {in S, forall x : T, f x \in S}
   injf : {in S &, injective f}
   ============================
@@ -10868,7 +10868,7 @@ COQC fingraph.v
   
   T : finType
   f : T -> T
-  S : predPredType T
+  S : pred_class
   f_in : {in S, forall x : T, f x \in S}
   injf : {in S &, injective f}
   ============================
@@ -10877,7 +10877,7 @@ COQC fingraph.v
   
   T : finType
   f : T -> T
-  S : predPredType T
+  S : pred_class
   f_in : {in S, forall x : T, f x \in S}
   injf : {in S &, injective f}
   ============================
@@ -10886,7 +10886,7 @@ COQC fingraph.v
   
   T : finType
   f : T -> T
-  S : predPredType T
+  S : pred_class
   f_in : {in S, forall x : T, f x \in S}
   injf : {in S &, injective f}
   ============================
@@ -10895,7 +10895,7 @@ COQC fingraph.v
   
   T : finType
   f : T -> T
-  S : predPredType T
+  S : pred_class
   f_in : {in S, forall x : T, f x \in S}
   injf : {in S &, injective f}
   ============================
@@ -10904,7 +10904,7 @@ COQC fingraph.v
   
   T : finType
   f : T -> T
-  S : predPredType T
+  S : pred_class
   f_in : {in S, forall x : T, f x \in S}
   injf : {in S &, injective f}
   n : nat
@@ -10914,7 +10914,7 @@ COQC fingraph.v
   
   T : finType
   f : T -> T
-  S : predPredType T
+  S : pred_class
   f_in : {in S, forall x : T, f x \in S}
   injf : {in S &, injective f}
   ============================
@@ -10923,7 +10923,7 @@ COQC fingraph.v
   
   T : finType
   f : T -> T
-  S : predPredType T
+  S : pred_class
   f_in : {in S, forall x : T, f x \in S}
   injf : {in S &, injective f}
   p : seq T
@@ -10935,7 +10935,7 @@ COQC fingraph.v
   
   T : finType
   f : T -> T
-  S : predPredType T
+  S : pred_class
   f_in : {in S, forall x : T, f x \in S}
   injf : {in S &, injective f}
   p : seq T
@@ -10946,7 +10946,7 @@ COQC fingraph.v
   
   T : finType
   f : T -> T
-  S : predPredType T
+  S : pred_class
   f_in : {in S, forall x : T, f x \in S}
   injf : {in S &, injective f}
   p : seq T
@@ -11677,7 +11677,7 @@ COQC finfun.v
   f : {ffun aT -> rT}
   i : 'I_#|aT|
   ============================
-  tnth (fgraph f) i = f (enum_val i)
+  tnth (fgraph f) i = fun_of_fin f (enum_val i)
 1 subgoal
   
   aT : finType
@@ -11691,21 +11691,21 @@ COQC finfun.v
   rT : Type
   f : {ffun aT -> rT}
   ============================
-  fgraph f = codom_tuple f
+  fgraph f = codom_tuple (fun_of_fin f)
 1 subgoal
   
   aT : finType
   rT : Type
   f : {ffun aT -> rT}
   ============================
-  codom f = val f
+  codom (fun_of_fin f) = val f
 1 subgoal
   
   aT : finType
   rT : Type
   f1, f2 : {ffun aT -> rT}
   ============================
-  f1 =1 f2 <-> f1 = f2
+  fun_of_fin f1 =1 fun_of_fin f2 <-> f1 = f2
 1 subgoal
   
   aT : finType
@@ -11720,7 +11720,7 @@ COQC finfun.v
   F : aT -> pT
   f : {ffun aT -> rT}
   ============================
-  reflect (forall x : aT, f x \in F x) (f \in family_mem (fmem F))
+  reflect (forall x : aT, fun_of_fin f x \in F x) (f \in family_mem (fmem F))
 1 subgoal
   
   aT : finType
@@ -11728,7 +11728,7 @@ COQC finfun.v
   R : pred rT
   f : {ffun aT -> rT}
   ============================
-  reflect (forall x : aT, f x \in R) (f \in ffun_on_mem (mem R))
+  reflect (forall x : aT, fun_of_fin f x \in R) (f \in ffun_on_mem (mem R))
 1 subgoal
   
   T : Type
@@ -11737,7 +11737,7 @@ COQC finfun.v
   i : 'I_n
   f : finfun_type (ordinal_finType n) T
   ============================
-  nth x0 (fgraph f) i = f i
+  nth x0 (fgraph f) i = fun_of_fin f i
 1 subgoal
   
   aT : Type
@@ -11766,7 +11766,9 @@ COQC finfun.v
   F : aT -> pT
   f : {ffun aT -> rT}
   ============================
-  reflect (y.-support f \subset D /\ {in D, forall x : aT, f x \in F x})
+  reflect
+    (y.-support (fun_of_fin f) \subset D /\
+     {in D, forall x : aT, fun_of_fin f x \in F x})
     (f \in pfamily_mem y (mem D) (fmem F))
 1 subgoal
   
@@ -11777,7 +11779,9 @@ COQC finfun.v
   R : pred rT
   f : {ffun aT -> rT}
   ============================
-  reflect (y.-support f \subset D /\ {subset [seq f x | x in D] <= R})
+  reflect
+    (y.-support (fun_of_fin f) \subset D /\
+     {subset [seq fun_of_fin f x | x in D] <= R})
     (f \in pffun_on_mem y (mem D) (mem R))
 1 subgoal
   
@@ -13339,7 +13343,8 @@ COQC bigop.v
   F : I -> J -> R
   ============================
   \big[*%M/1]_(i | P i) \big[+%M/0]_(j | Q i j) F i j =
-  \big[+%M/0]_(f in pfamily j0 P Q) \big[*%M/1]_(i | P i) F i (f i)
+  \big[+%M/0]_(f in pfamily j0 P Q)
+     \big[*%M/1]_(i | P i) F i (fun_of_fin f i)
 1 subgoal
   
   R : Type
@@ -13353,7 +13358,8 @@ COQC bigop.v
   F : I -> J -> R
   ============================
   \big[*%M/1]_(i | P i) \big[+%M/0]_(j | Q j) F i j =
-  \big[+%M/0]_(f in pffun_on j0 P Q) \big[*%M/1]_(i | P i) F i (f i)
+  \big[+%M/0]_(f in pffun_on j0 P Q)
+     \big[*%M/1]_(i | P i) F i (fun_of_fin f i)
 1 subgoal
   
   R : Type
@@ -13365,7 +13371,7 @@ COQC bigop.v
   F : I -> J -> R
   ============================
   \big[*%M/1]_i \big[+%M/0]_(j | Q i j) F i j =
-  \big[+%M/0]_(f in family Q) \big[*%M/1]_i F i (f i)
+  \big[+%M/0]_(f in family Q) \big[*%M/1]_i F i (fun_of_fin f i)
 1 subgoal
   
   R : Type
@@ -13377,7 +13383,7 @@ COQC bigop.v
   F : I -> J -> R
   ============================
   \big[*%M/1]_i \big[+%M/0]_(j | Q j) F i j =
-  \big[+%M/0]_(f in ffun_on Q) \big[*%M/1]_i F i (f i)
+  \big[+%M/0]_(f in ffun_on Q) \big[*%M/1]_i F i (fun_of_fin f i)
 1 subgoal
   
   R : Type
@@ -13387,7 +13393,8 @@ COQC bigop.v
   I, J : finType
   F : I -> J -> R
   ============================
-  \big[*%M/1]_i \big[+%M/0]_j F i j = \big[+%M/0]_f \big[*%M/1]_i F i (f i)
+  \big[*%M/1]_i \big[+%M/0]_j F i j =
+  \big[+%M/0]_f \big[*%M/1]_i F i (fun_of_fin f i)
 1 subgoal
   
   I : Type
@@ -14465,7 +14472,8 @@ COQC finset.v
 1 subgoal
   
   ============================
-  pred_of_set = (fun (T : finType) (A : set_type T) => val A : T -> bool)
+  pred_of_set =
+  (fun (T : finType) (A : set_type T) => fun_of_fin (val A) : T -> bool)
 1 subgoal
   
   T : finType
@@ -14478,13 +14486,13 @@ COQC finset.v
   T : finType
   A, B : {set T}
   ============================
-  A =i B <-> A = B
+  pred_of_set A =i pred_of_set B <-> A = B
 1 subgoal
   
   T : finType
   x : T
   ============================
-  x \in setTfor (Phant T)
+  x \in pred_of_set (setTfor (Phant T))
 1 subgoal
   
   T : finType
@@ -14496,102 +14504,114 @@ COQC finset.v
   T : finType
   A, B : {set T}
   ============================
-  (A == B) = (A \subset B) && (B \subset A)
+  (A == B) =
+  (pred_of_set A \subset pred_of_set B) &&
+  (pred_of_set B \subset pred_of_set A)
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  (A \subset B) = (A == B) || (A \proper B)
+  (pred_of_set A \subset pred_of_set B) =
+  (A == B) || (pred_of_set A \proper pred_of_set B)
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  A \subset B -> A = B \/ A \proper B
+  pred_of_set A \subset pred_of_set B ->
+  A = B \/ pred_of_set A \proper pred_of_set B
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  (A \proper B) = (A != B) && (A \subset B)
+  (pred_of_set A \proper pred_of_set B) =
+  (A != B) && (pred_of_set A \subset pred_of_set B)
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  A \proper B -> A != B
+  pred_of_set A \proper pred_of_set B -> A != B
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  (A == B) = (A \subset B) && ~~ (A \proper B)
+  (A == B) =
+  (pred_of_set A \subset pred_of_set B) &&
+  ~~ (pred_of_set A \proper pred_of_set B)
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  (A == B) = (A \subset B) && (#|B| <= #|A|)
+  (A == B) =
+  (pred_of_set A \subset pred_of_set B) &&
+  (#|pred_of_set B| <= #|pred_of_set A|)
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  (A \proper B) = (A \subset B) && (#|A| < #|B|)
+  (pred_of_set A \proper pred_of_set B) =
+  (pred_of_set A \subset pred_of_set B) &&
+  (#|pred_of_set A| < #|pred_of_set B|)
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  A \subset B -> #|A| <= #|B| ?= iff (A == B)
+  pred_of_set A \subset pred_of_set B ->
+  #|pred_of_set A| <= #|pred_of_set B| ?= iff (A == B)
 1 subgoal
   
   T : finType
   x : T
   ============================
-  (x \in set0) = false
+  (x \in pred_of_set set0) = false
 1 subgoal
   
   T : finType
   A : {set T}
   ============================
-  set0 \subset A
+  pred_of_set set0 \subset pred_of_set A
 1 subgoal
   
   T : finType
   A : {set T}
   ============================
-  (A \subset set0) = (A == set0)
+  (pred_of_set A \subset pred_of_set set0) = (A == set0)
 1 subgoal
   
   T : finType
   A : {set T}
   ============================
-  (set0 \proper A) = (A != set0)
+  (pred_of_set set0 \proper pred_of_set A) = (A != set0)
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  A \subset B -> A != set0 -> B != set0
+  pred_of_set A \subset pred_of_set B -> A != set0 -> B != set0
 1 subgoal
   
   T : finType
   A : {set T}
   ============================
-  (A = set0) + {x : T | x \in A}
+  (A = set0) + {x : T | x \in pred_of_set A}
 1 subgoal
   
   T : finType
   ============================
-  enum set0 = [::]
+  enum (pred_of_set set0) = [::]
 1 subgoal
   
   T : finType
   A : {set T}
   ============================
-  A \subset [set: T]
+  pred_of_set A \subset [set: T]
 1 subgoal
   
   T : finType
@@ -14603,13 +14623,13 @@ COQC finset.v
   T : finType
   A : {set T}
   ============================
-  ([set: T] \subset A) = (A == [set: T])
+  ([set: T] \subset pred_of_set A) = (A == [set: T])
 1 subgoal
   
   T : finType
   A : {set T}
   ============================
-  (A \proper [set: T]) = (A != [set: T])
+  (pred_of_set A \proper [set: T]) = (A != [set: T])
 1 subgoal
   
   T : finType
@@ -14650,14 +14670,14 @@ COQC finset.v
   x, a : T
   B : {set T}
   ============================
-  reflect (x = a \/ x \in B) (x \in a |: B)
+  reflect (x = a \/ x \in pred_of_set B) (x \in a |: B)
 1 subgoal
   
   T : finType
   x, a : T
   B : {set T}
   ============================
-  (x \in a |: B) = (x == a) || (x \in B)
+  (x \in a |: B) = (x == a) || (x \in pred_of_set B)
 1 subgoal
   
   T : finType
@@ -14678,7 +14698,7 @@ COQC finset.v
   x, a : T
   B : {set T}
   ============================
-  x \in B -> x \in a |: B
+  x \in pred_of_set B -> x \in a |: B
 1 subgoal
   
   T : finType
@@ -14686,7 +14706,7 @@ COQC finset.v
   A : {set T}
   b : T
   ============================
-  x \in A -> x \in A :|: [set b]
+  x \in pred_of_set A -> x \in A :|: [set b]
 1 subgoal
   
   T : finType
@@ -14713,7 +14733,7 @@ COQC finset.v
   A : {set T}
   b : T
   ============================
-  reflect (x != b /\ x \in A) (x \in A :\ b)
+  reflect (x != b /\ x \in pred_of_set A) (x \in A :\ b)
 1 subgoal
   
   T : finType
@@ -14721,7 +14741,7 @@ COQC finset.v
   A : {set T}
   b : T
   ============================
-  (x \in A :\ b) = (x != b) && (x \in A)
+  (x \in A :\ b) = (x != b) && (x \in pred_of_set A)
 1 subgoal
   
   T : finType
@@ -14735,14 +14755,14 @@ COQC finset.v
   a : T
   A : {set T}
   ============================
-  a \in A -> a |: A :\ a = A
+  a \in pred_of_set A -> a |: A :\ a = A
 1 subgoal
   
   T : finType
   a : T
   B : {set T}
   ============================
-  a \notin B -> (a |: B) :\ a = B
+  a \notin pred_of_set B -> (a |: B) :\ a = B
 1 subgoal
   
   T : finType
@@ -14773,14 +14793,14 @@ COQC finset.v
   x : T
   A, B : {set T}
   ============================
-  reflect (x \in A \/ x \in B) (x \in A :|: B)
+  reflect (x \in pred_of_set A \/ x \in pred_of_set B) (x \in A :|: B)
 1 subgoal
   
   T : finType
   x : T
   A, B : {set T}
   ============================
-  (x \in A :|: B) = (x \in A) || (x \in B)
+  (x \in A :|: B) = (x \in pred_of_set A) || (x \in pred_of_set B)
 1 subgoal
   
   T : finType
@@ -14792,19 +14812,20 @@ COQC finset.v
   T : finType
   A, B, C : {set T}
   ============================
-  A \subset B -> C :|: A \subset C :|: B
+  pred_of_set A \subset pred_of_set B -> C :|: A \subset C :|: B
 1 subgoal
   
   T : finType
   A, B, C : {set T}
   ============================
-  A \subset B -> A :|: C \subset B :|: C
+  pred_of_set A \subset pred_of_set B -> A :|: C \subset B :|: C
 1 subgoal
   
   T : finType
   A, B, C, D : {set T}
   ============================
-  A \subset C -> B \subset D -> A :|: B \subset C :|: D
+  pred_of_set A \subset pred_of_set C ->
+  pred_of_set B \subset pred_of_set D -> A :|: B \subset C :|: D
 1 subgoal
   
   T : finType
@@ -14891,21 +14912,21 @@ COQC finset.v
   A : {set T}
   pB : pred T
   ============================
-  [set x in A | pB x] = A :&: [set x | pB x]
+  [set x in pred_of_set A | pB x] = A :&: [set x | pB x]
 1 subgoal
   
   T : finType
   x : T
   A, B : {set T}
   ============================
-  reflect (x \in A /\ x \in B) (x \in A :&: B)
+  reflect (x \in pred_of_set A /\ x \in pred_of_set B) (x \in A :&: B)
 1 subgoal
   
   T : finType
   x : T
   A, B : {set T}
   ============================
-  (x \in A :&: B) = (x \in A) && (x \in B)
+  (x \in A :&: B) = (x \in pred_of_set A) && (x \in pred_of_set B)
 1 subgoal
   
   T : finType
@@ -14917,19 +14938,20 @@ COQC finset.v
   T : finType
   A, B, C : {set T}
   ============================
-  A \subset B -> C :&: A \subset C :&: B
+  pred_of_set A \subset pred_of_set B -> C :&: A \subset C :&: B
 1 subgoal
   
   T : finType
   A, B, C : {set T}
   ============================
-  A \subset B -> A :&: C \subset B :&: C
+  pred_of_set A \subset pred_of_set B -> A :&: C \subset B :&: C
 1 subgoal
   
   T : finType
   A, B, C, D : {set T}
   ============================
-  A \subset C -> B \subset D -> A :&: B \subset C :&: D
+  pred_of_set A \subset pred_of_set C ->
+  pred_of_set B \subset pred_of_set D -> A :&: B \subset C :&: D
 1 subgoal
   
   T : finType
@@ -15050,14 +15072,14 @@ COQC finset.v
   x : T
   A : {set T}
   ============================
-  reflect (~ x \in A) (x \in ~: A)
+  reflect (~ x \in pred_of_set A) (x \in ~: A)
 1 subgoal
   
   T : finType
   x : T
   A : {set T}
   ============================
-  (x \in ~: A) = (x \notin A)
+  (x \in ~: A) = (x \notin pred_of_set A)
 1 subgoal
   
   T : finType
@@ -15073,25 +15095,26 @@ COQC finset.v
   T : finType
   A, B : {set T}
   ============================
-  (A \subset B) = [disjoint A & ~: B]
+  (pred_of_set A \subset pred_of_set B) = [disjoint pred_of_set A & ~: B]
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  [disjoint A & B] = (A \subset ~: B)
+  [disjoint pred_of_set A & pred_of_set B] = (pred_of_set A \subset ~: B)
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  (A \in powerset (~: B)) = [disjoint A & B]
+  (A \in pred_of_set (powerset (~: B))) =
+  [disjoint pred_of_set A & pred_of_set B]
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  (~: A \subset ~: B) = (B \subset A)
+  (~: A \subset ~: B) = (pred_of_set B \subset pred_of_set A)
 1 subgoal
   
   T : finType
@@ -15132,14 +15155,14 @@ COQC finset.v
   A, B : {set T}
   x : T
   ============================
-  reflect (x \in A /\ x \notin B) (x \in A :\: B)
+  reflect (x \in pred_of_set A /\ x \notin pred_of_set B) (x \in A :\: B)
 1 subgoal
   
   T : finType
   A, B : {set T}
   x : T
   ============================
-  (x \in A :\: B) = (x \notin B) && (x \in A)
+  (x \in A :\: B) = (x \notin pred_of_set B) && (x \in pred_of_set A)
 1 subgoal
   
   T : finType
@@ -15151,19 +15174,20 @@ COQC finset.v
   T : finType
   A, B, C : {set T}
   ============================
-  A \subset B -> A :\: C \subset B :\: C
+  pred_of_set A \subset pred_of_set B -> A :\: C \subset B :\: C
 1 subgoal
   
   T : finType
   A, B, C : {set T}
   ============================
-  A \subset B -> C :\: B \subset C :\: A
+  pred_of_set A \subset pred_of_set B -> C :\: B \subset C :\: A
 1 subgoal
   
   T : finType
   A, B, C, D : {set T}
   ============================
-  A \subset C -> D \subset B -> A :\: B \subset C :\: D
+  pred_of_set A \subset pred_of_set C ->
+  pred_of_set D \subset pred_of_set B -> A :\: B \subset C :\: D
 1 subgoal
   
   T : finType
@@ -15259,13 +15283,14 @@ COQC finset.v
   T : finType
   A, B : {set T}
   ============================
-  (A \in powerset B) = (A \subset B)
+  (A \in pred_of_set (powerset B)) = (pred_of_set A \subset pred_of_set B)
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  (powerset A \subset powerset B) = (A \subset B)
+  (pred_of_set (powerset A) \subset pred_of_set (powerset B)) =
+  (pred_of_set A \subset pred_of_set B)
 1 subgoal
   
   T : finType
@@ -15306,31 +15331,31 @@ COQC finset.v
   
   T : finType
   ============================
-  #|set0| = 0
+  #|pred_of_set set0| = 0
 1 subgoal
   
   T : finType
   A : {set T}
   ============================
-  (#|A| == 0) = (A == set0)
+  (#|pred_of_set A| == 0) = (A == set0)
 1 subgoal
   
   T : finType
   A : {set T}
   ============================
-  reflect (exists x : T, x \in A) (A != set0)
+  reflect (exists x : T, x \in pred_of_set A) (A != set0)
 1 subgoal
   
   T : finType
   A : {set T}
   ============================
-  (0 < #|A|) = (A != set0)
+  (0 < #|pred_of_set A|) = (A != set0)
 1 subgoal
   
   T : finType
   A : {set T}
   ============================
-  #|A| = 0 -> A = set0
+  #|pred_of_set A| = 0 -> A = set0
 1 subgoal
   
   T : finType
@@ -15342,19 +15367,19 @@ COQC finset.v
   T : finType
   A, B : {set T}
   ============================
-  #|A :|: B| + #|A :&: B| = #|A| + #|B|
+  #|A :|: B| + #|A :&: B| = #|pred_of_set A| + #|pred_of_set B|
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  #|A :|: B| = #|A| + #|B| - #|A :&: B|
+  #|A :|: B| = #|pred_of_set A| + #|pred_of_set B| - #|A :&: B|
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  #|A :&: B| = #|A| + #|B| - #|A :|: B|
+  #|A :&: B| = #|pred_of_set A| + #|pred_of_set B| - #|A :|: B|
 1 subgoal
   
   T : finType
@@ -15365,32 +15390,32 @@ COQC finset.v
   T : finType
   B, A : {set T}
   ============================
-  #|A :&: B| + #|A :\: B| = #|A|
+  #|A :&: B| + #|A :\: B| = #|pred_of_set A|
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  #|A :\: B| = #|A| - #|A :&: B|
+  #|A :\: B| = #|pred_of_set A| - #|A :&: B|
 1 subgoal
   
   T : finType
   A : {set T}
   ============================
-  #|A| + #|~: A| = #|T|
+  #|pred_of_set A| + #|~: A| = #|T|
 1 subgoal
   
   T : finType
   A : {set T}
   ============================
-  #|A| = #|T| - #|~: A|
+  #|pred_of_set A| = #|T| - #|~: A|
 1 subgoal
   
   T : finType
   a : T
   A : {set T}
   ============================
-  #|a |: A| = (a \notin A) + #|A|
+  #|a |: A| = (a \notin pred_of_set A) + #|pred_of_set A|
 1 subgoal
   
   T : finType
@@ -15409,51 +15434,51 @@ COQC finset.v
   a : T
   A : {set T}
   ============================
-  #|A| = (a \in A) + #|A :\ a|
+  #|pred_of_set A| = (a \in pred_of_set A) + #|A :\ a|
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  A :&: B \subset A
+  A :&: B \subset pred_of_set A
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  A :&: B \subset B
+  A :&: B \subset pred_of_set B
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  A \subset A :|: B
+  pred_of_set A \subset A :|: B
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  B \subset A :|: B
+  pred_of_set B \subset A :|: B
 1 subgoal
   
   T : finType
   x : T
   A : {set T}
   ============================
-  A \subset x |: A
+  pred_of_set A \subset x |: A
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  A :\: B \subset A
+  A :\: B \subset pred_of_set A
 1 subgoal
   
   T : finType
   A : {set T}
   x : T
   ============================
-  A :\ x \subset A
+  A :\ x \subset pred_of_set A
 1 subgoal
   
   T : finType
@@ -15466,20 +15491,20 @@ COQC finset.v
   A : {set T}
   x : T
   ============================
-  ([set x] \subset A) = (x \in A)
+  ([set x] \subset pred_of_set A) = (x \in pred_of_set A)
 1 subgoal
   
   T : finType
   A : {set T}
   ============================
-  reflect (exists x : T, A = [set x]) (#|A| == 1)
+  reflect (exists x : T, A = [set x]) (#|pred_of_set A| == 1)
 1 subgoal
   
   T : finType
   A : {set T}
   x : T
   ============================
-  (A \subset [set x]) = (A == [set x]) || (A == set0)
+  (pred_of_set A \subset [set x]) = (A == [set x]) || (A == set0)
 1 subgoal
   
   T : finType
@@ -15491,67 +15516,73 @@ COQC finset.v
   T : finType
   A, B : {set T}
   ============================
-  reflect (A :&: B = A) (A \subset B)
+  reflect (A :&: B = A) (pred_of_set A \subset pred_of_set B)
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  reflect (A :&: B = B) (B \subset A)
+  reflect (A :&: B = B) (pred_of_set B \subset pred_of_set A)
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  B \subset A -> #|A :\: B| = #|A| - #|B|
+  pred_of_set B \subset pred_of_set A ->
+  #|A :\: B| = #|pred_of_set A| - #|pred_of_set B|
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  reflect (A :|: B = A) (B \subset A)
+  reflect (A :|: B = A) (pred_of_set B \subset pred_of_set A)
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  reflect (A :|: B = B) (A \subset B)
+  reflect (A :|: B = B) (pred_of_set A \subset pred_of_set B)
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  reflect (A :\: B = A) [disjoint A & B]
+  reflect (A :\: B = A) [disjoint pred_of_set A & pred_of_set B]
 1 subgoal
   
   T : finType
   A, B, C : {set T}
   ============================
-  (B \subset A) || (C \subset A) -> B :&: C \subset A
+  (pred_of_set B \subset pred_of_set A)
+  || (pred_of_set C \subset pred_of_set A) -> B :&: C \subset pred_of_set A
 1 subgoal
   
   T : finType
   A, B, C : {set T}
   ============================
-  (A \subset B :&: C) = (A \subset B) && (A \subset C)
+  (pred_of_set A \subset B :&: C) =
+  (pred_of_set A \subset pred_of_set B) &&
+  (pred_of_set A \subset pred_of_set C)
 1 subgoal
   
   T : finType
   A, B, C : {set T}
   ============================
-  reflect (A \subset B /\ A \subset C) (A \subset B :&: C)
+  reflect
+    (pred_of_set A \subset pred_of_set B /\
+     pred_of_set A \subset pred_of_set C) (pred_of_set A \subset B :&: C)
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  (A \subset A :&: B) = (A \subset B)
+  (pred_of_set A \subset A :&: B) = (pred_of_set A \subset pred_of_set B)
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  (B \subset A :&: B) = (B \subset A)
+  (pred_of_set B \subset A :&: B) = (pred_of_set B \subset pred_of_set A)
 1 subgoal
   
   T : finType
@@ -15563,49 +15594,59 @@ COQC finset.v
   T : finType
   A, B, C : {set T}
   ============================
-  (B :|: C \subset A) = (B \subset A) && (C \subset A)
+  (B :|: C \subset pred_of_set A) =
+  (pred_of_set B \subset pred_of_set A) &&
+  (pred_of_set C \subset pred_of_set A)
 1 subgoal
   
   T : finType
   A, B, C : {set T}
   ============================
-  (A \subset B) || (A \subset C) -> A \subset B :|: C
+  (pred_of_set A \subset pred_of_set B)
+  || (pred_of_set A \subset pred_of_set C) -> pred_of_set A \subset B :|: C
 1 subgoal
   
   T : finType
   A, B, C : {set T}
   ============================
-  reflect (A \subset C /\ B \subset C) (A :|: B \subset C)
+  reflect
+    (pred_of_set A \subset pred_of_set C /\
+     pred_of_set B \subset pred_of_set C) (A :|: B \subset pred_of_set C)
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  (A \subset ~: B) = (B \subset ~: A)
+  (pred_of_set A \subset ~: B) = (pred_of_set B \subset ~: A)
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  (~: A \subset B) = (~: B \subset A)
+  (~: A \subset pred_of_set B) = (~: B \subset pred_of_set A)
 1 subgoal
   
   T : finType
   A, B, C : {set T}
   ============================
-  (A \subset B :\: C) = (A \subset B) && [disjoint A & C]
+  (pred_of_set A \subset B :\: C) =
+  (pred_of_set A \subset pred_of_set B) &&
+  [disjoint pred_of_set A & pred_of_set C]
 1 subgoal
   
   T : finType
   A, B, C : {set T}
   ============================
-  (A :\: B \subset C) = (A \subset B :|: C)
+  (A :\: B \subset pred_of_set C) = (pred_of_set A \subset B :|: C)
 1 subgoal
   
   T : finType
   A, B, C : {set T}
   ============================
-  reflect (A \subset B /\ [disjoint A & C]) (A \subset B :\: C)
+  reflect
+    (pred_of_set A \subset pred_of_set B /\
+     [disjoint pred_of_set A & pred_of_set C])
+    (pred_of_set A \subset B :\: C)
 1 subgoal
   
   T : finType
@@ -15617,95 +15658,104 @@ COQC finset.v
   T : finType
   A, B : {set T}
   ============================
-  (A :\: B == set0) = (A \subset B)
+  (A :\: B == set0) = (pred_of_set A \subset pred_of_set B)
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  (A :&: B == set0) = [disjoint A & B]
+  (A :&: B == set0) = [disjoint pred_of_set A & pred_of_set B]
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  [disjoint A & B] -> A :&: B = set0
-1 subgoal
-  
-  T : finType
-  A, B : {set T}
-  x : T
-  ============================
-  (A \subset B :\ x) = (A \subset B) && (x \notin A)
+  [disjoint pred_of_set A & pred_of_set B] -> A :&: B = set0
 1 subgoal
   
   T : finType
   A, B : {set T}
   x : T
   ============================
-  reflect (A \subset B /\ x \notin A) (A \subset B :\ x)
+  (pred_of_set A \subset B :\ x) =
+  (pred_of_set A \subset pred_of_set B) && (x \notin pred_of_set A)
+1 subgoal
+  
+  T : finType
+  A, B : {set T}
+  x : T
+  ============================
+  reflect (pred_of_set A \subset pred_of_set B /\ x \notin pred_of_set A)
+    (pred_of_set A \subset B :\ x)
 1 subgoal
   
   T : finType
   A : {set T}
   x : T
   ============================
-  x \in A -> A :\ x \proper A
+  x \in pred_of_set A -> A :\ x \proper pred_of_set A
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  ~~ (B \subset A) -> A :&: B \proper B
+  ~~ (pred_of_set B \subset pred_of_set A) -> A :&: B \proper pred_of_set B
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  ~~ (A \subset B) -> A :&: B \proper A
+  ~~ (pred_of_set A \subset pred_of_set B) -> A :&: B \proper pred_of_set A
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  ~~ (A \subset B) -> B \proper A :|: B
+  ~~ (pred_of_set A \subset pred_of_set B) -> pred_of_set B \proper A :|: B
 1 subgoal
   
   T : finType
   A, B : {set T}
   ============================
-  ~~ (B \subset A) -> A \proper A :|: B
+  ~~ (pred_of_set B \subset pred_of_set A) -> pred_of_set A \proper A :|: B
 1 subgoal
   
   T : finType
   A : {set T}
   x : T
   ============================
-  [set x] \proper A -> x \in A
+  [set x] \proper pred_of_set A -> x \in pred_of_set A
 1 subgoal
   
   T : finType
   A, B, C : {set T}
   ============================
-  (B \proper A) || (C \proper A) -> B :&: C \proper A
+  (pred_of_set B \proper pred_of_set A)
+  || (pred_of_set C \proper pred_of_set A) -> B :&: C \proper pred_of_set A
 1 subgoal
   
   T : finType
   A, B, C : {set T}
   ============================
-  A \proper B :&: C -> (A \proper B) && (A \proper C)
+  pred_of_set A \proper B :&: C ->
+  (pred_of_set A \proper pred_of_set B) &&
+  (pred_of_set A \proper pred_of_set C)
 1 subgoal
   
   T : finType
   A, B, C : {set T}
   ============================
-  B :|: C \proper A -> (B \proper A) && (C \proper A)
+  B :|: C \proper pred_of_set A ->
+  (pred_of_set B \proper pred_of_set A) &&
+  (pred_of_set C \proper pred_of_set A)
 1 subgoal
   
   T : finType
   A, B, C : {set T}
   ============================
-  A \proper B :\: C -> (A \proper B) && [disjoint A & C]
+  pred_of_set A \proper B :\: C ->
+  (pred_of_set A \proper pred_of_set B) &&
+  [disjoint pred_of_set A & pred_of_set C]
 1 subgoal
   
   fT1, fT2 : finType
@@ -15714,7 +15764,8 @@ COQC finset.v
   x1 : fT1
   x2 : fT2
   ============================
-  ((x1, x2) \in setX) = (x1 \in A1) && (x2 \in A2)
+  ((x1, x2) \in pred_of_set setX) =
+  (x1 \in pred_of_set A1) && (x2 \in pred_of_set A2)
 1 subgoal
   
   fT1, fT2 : finType
@@ -15723,14 +15774,15 @@ COQC finset.v
   x1 : fT1
   x2 : fT2
   ============================
-  reflect (x1 \in A1 /\ x2 \in A2) ((x1, x2) \in setX)
+  reflect (x1 \in pred_of_set A1 /\ x2 \in pred_of_set A2)
+    ((x1, x2) \in pred_of_set setX)
 1 subgoal
   
   fT1, fT2 : finType
   A1 : {set fT1}
   A2 : {set fT2}
   ============================
-  #|setX| = #|A1| * #|A2|
+  #|pred_of_set setX| = #|pred_of_set A1| * #|pred_of_set A2|
 1 subgoal
   
   ============================
@@ -15778,7 +15830,7 @@ COQC finset.v
   f : aT -> rT
   f2 : aT -> aT2 -> rT
   ============================
-  [set f x | x in set0] = set0
+  [set f x | x in pred_of_set set0] = set0
 1 subgoal
   
   aT, aT2, rT : finType
@@ -15786,7 +15838,7 @@ COQC finset.v
   f2 : aT -> aT2 -> rT
   A : {set aT}
   ============================
-  ([set f x | x in A] == set0) = (A == set0)
+  ([set f x | x in pred_of_set A] == set0) = (A == set0)
 1 subgoal
   
   aT, aT2, rT : finType
@@ -15829,7 +15881,7 @@ COQC finset.v
   f : aT -> rT
   f2 : aT -> aT2 -> rT
   ============================
-  f @^-1: set0 = set0
+  f @^-1: pred_of_set set0 = set0
 1 subgoal
   
   aT, aT2, rT : finType
@@ -15844,7 +15896,7 @@ COQC finset.v
   f2 : aT -> aT2 -> rT
   A, B : {set rT}
   ============================
-  f @^-1: (A :&: B) = f @^-1: A :&: f @^-1: B
+  f @^-1: (A :&: B) = f @^-1: pred_of_set A :&: f @^-1: pred_of_set B
 1 subgoal
   
   aT, aT2, rT : finType
@@ -15852,7 +15904,7 @@ COQC finset.v
   f2 : aT -> aT2 -> rT
   A, B : {set rT}
   ============================
-  f @^-1: (A :|: B) = f @^-1: A :|: f @^-1: B
+  f @^-1: (A :|: B) = f @^-1: pred_of_set A :|: f @^-1: pred_of_set B
 1 subgoal
   
   aT, aT2, rT : finType
@@ -15860,7 +15912,7 @@ COQC finset.v
   f2 : aT -> aT2 -> rT
   A, B : {set rT}
   ============================
-  f @^-1: (A :\: B) = f @^-1: A :\: f @^-1: B
+  f @^-1: (A :\: B) = f @^-1: pred_of_set A :\: f @^-1: pred_of_set B
 1 subgoal
   
   aT, aT2, rT : finType
@@ -15868,7 +15920,7 @@ COQC finset.v
   f2 : aT -> aT2 -> rT
   A : {set rT}
   ============================
-  f @^-1: (~: A) = ~: f @^-1: A
+  f @^-1: (~: A) = ~: f @^-1: pred_of_set A
 1 subgoal
   
   aT, aT2, rT : finType
@@ -15884,8 +15936,9 @@ COQC finset.v
   f2 : aT -> aT2 -> rT
   A, B : {set aT}
   ============================
-  {in B &, injective f} ->
-  A \proper B -> [set f x | x in A] \proper [set f x | x in B]
+  {in pred_of_set B &, injective f} ->
+  pred_of_set A \proper pred_of_set B ->
+  [set f x | x in pred_of_set A] \proper [set f x | x in pred_of_set B]
 1 subgoal
   
   aT, aT2, rT : finType
@@ -15893,7 +15946,9 @@ COQC finset.v
   f2 : aT -> aT2 -> rT
   A, B : {set rT}
   ============================
-  B \subset codom f -> A \proper B -> f @^-1: A \proper f @^-1: B
+  pred_of_set B \subset codom f ->
+  pred_of_set A \proper pred_of_set B ->
+  f @^-1: pred_of_set A \proper f @^-1: pred_of_set B
 1 subgoal
   
   aT, aT2, rT : finType
@@ -15901,7 +15956,8 @@ COQC finset.v
   f2 : aT -> aT2 -> rT
   A, B : {set aT}
   ============================
-  [set f x | x in A :|: B] = [set f x | x in A] :|: [set f x | x in B]
+  [set f x | x in A :|: B] =
+  [set f x | x in pred_of_set A] :|: [set f x | x in pred_of_set B]
 1 subgoal
   
   aT, aT2, rT : finType
@@ -15910,7 +15966,7 @@ COQC finset.v
   a : aT
   A : {set aT}
   ============================
-  [set f x | x in a |: A] = f a |: [set f x | x in A]
+  [set f x | x in a |: A] = f a |: [set f x | x in pred_of_set A]
 1 subgoal
   
   aT, aT2, rT : finType
@@ -15918,8 +15974,9 @@ COQC finset.v
   f2 : aT -> aT2 -> rT
   A, B : {set aT}
   ============================
-  {in A & B, injective f} ->
-  [set f x | x in A :&: B] = [set f x | x in A] :&: [set f x | x in B]
+  {in pred_of_set A & pred_of_set B, injective f} ->
+  [set f x | x in A :&: B] =
+  [set f x | x in pred_of_set A] :&: [set f x | x in pred_of_set B]
 1 subgoal
   
   aT, aT2, rT : finType
@@ -15964,14 +16021,15 @@ COQC finset.v
   f, g : aT -> rT
   D : {set aT}
   ============================
-  f =1 g -> [set f x | x in D] = [set g x | x in D]
+  f =1 g -> [set f x | x in pred_of_set D] = [set g x | x in pred_of_set D]
 1 subgoal
   
   aT, aT2, rT : finType
   f, g : aT -> rT
   D : {set aT}
   ============================
-  {in D, f =1 g} -> [set f x | x in D] = [set g x | x in D]
+  {in pred_of_set D, f =1 g} ->
+  [set f x | x in pred_of_set D] = [set g x | x in pred_of_set D]
 1 subgoal
   
   aT, aT2, rT : finType
@@ -15987,14 +16045,16 @@ COQC finset.v
   A : {set aT}
   B : {set aT2}
   ============================
-  [set (x, y) | x in A, y in B] = setX A B
+  [set (x, y) | x in pred_of_set A, y in pred_of_set B] = setX A B
 1 subgoal
   
   aT, aT2 : finType
   A1, B1 : {set aT}
   A2, B2 : {set aT2}
   ============================
-  A1 \subset B1 -> A2 \subset B2 -> setX A1 A2 \subset setX B1 B2
+  pred_of_set A1 \subset pred_of_set B1 ->
+  pred_of_set A2 \subset pred_of_set B2 ->
+  pred_of_set (setX A1 A2) \subset pred_of_set (setX B1 B2)
 1 subgoal
   
   R : Type
@@ -16004,7 +16064,7 @@ COQC finset.v
   I, J : finType
   F : I -> R
   ============================
-  \big[op/idx]_(i in set0) F i = idx
+  \big[op/idx]_(i in pred_of_set set0) F i = idx
 1 subgoal
   
   R : Type
@@ -16027,7 +16087,7 @@ COQC finset.v
   P : pred I
   F : I -> R
   ============================
-  \big[aop/idx]_(i in A | P i) F i =
+  \big[aop/idx]_(i in pred_of_set A | P i) F i =
   aop (\big[aop/idx]_(i in A :&: B | P i) F i)
     (\big[aop/idx]_(i in A :\: B | P i) F i)
 1 subgoal
@@ -16040,7 +16100,7 @@ COQC finset.v
   A, B : {set I}
   F : I -> R
   ============================
-  \big[aop/idx]_(i in A) F i =
+  \big[aop/idx]_(i in pred_of_set A) F i =
   aop (\big[aop/idx]_(i in A :&: B) F i) (\big[aop/idx]_(i in A :\: B) F i)
 1 subgoal
   
@@ -16053,8 +16113,9 @@ COQC finset.v
   A : {set I}
   F : I -> R
   ============================
-  a \in A ->
-  \big[aop/idx]_(i in A) F i = aop (F a) (\big[aop/idx]_(i in A :\ a) F i)
+  a \in pred_of_set A ->
+  \big[aop/idx]_(i in pred_of_set A) F i =
+  aop (F a) (\big[aop/idx]_(i in A :\ a) F i)
 1 subgoal
   
   R : Type
@@ -16066,8 +16127,9 @@ COQC finset.v
   A : {set I}
   F : I -> R
   ============================
-  a \notin A ->
-  \big[aop/idx]_(i in (a |: A)) F i = aop (F a) (\big[aop/idx]_(i in A) F i)
+  a \notin pred_of_set A ->
+  \big[aop/idx]_(i in (a |: A)) F i =
+  aop (F a) (\big[aop/idx]_(i in pred_of_set A) F i)
 1 subgoal
   
   R : Type
@@ -16189,26 +16251,26 @@ COQC finset.v
   f, g : T -> T
   A : {set T}
   ============================
-  cancel f g -> [set f x | x in A] = g @^-1: A
+  cancel f g -> [set f x | x in pred_of_set A] = g @^-1: pred_of_set A
 1 subgoal
   
   T : finType
   A : {set T}
   ============================
-  [set x | x in A] = A
+  [set x | x in pred_of_set A] = A
 1 subgoal
   
   T : finType
   f : T -> T
   A : {set T}
   ============================
-  injective f -> #|f @^-1: A| = #|A|
+  injective f -> #|f @^-1: pred_of_set A| = #|pred_of_set A|
 1 subgoal
   
   T : finType
   A : {set T}
   ============================
-  #|powerset A| = 2 ^ #|A|
+  #|pred_of_set (powerset A)| = 2 ^ #|pred_of_set A|
 1 subgoal
   
   T, T', U : finType
@@ -16224,7 +16286,7 @@ COQC finset.v
   P : pred I
   F : I -> {set T}
   ============================
-  P j -> F j \subset \bigcup_(i | P i) F i
+  P j -> pred_of_set (F j) \subset \bigcup_(i | P i) F i
 1 subgoal
   
   T, I : finType
@@ -16233,7 +16295,7 @@ COQC finset.v
   P : pred I
   F : I -> {set T}
   ============================
-  P j -> U \subset F j -> U \subset \bigcup_(i | P i) F i
+  P j -> U \subset pred_of_set (F j) -> U \subset \bigcup_(i | P i) F i
 1 subgoal
   
   T, I : finType
@@ -16241,7 +16303,8 @@ COQC finset.v
   P : pred I
   F : I -> {set T}
   ============================
-  reflect (exists2 i : I, P i & x \in F i) (x \in \bigcup_(i | P i) F i)
+  reflect (exists2 i : I, P i & x \in pred_of_set (F i))
+    (x \in \bigcup_(i | P i) F i)
 1 subgoal
   
   T, I : finType
@@ -16249,7 +16312,7 @@ COQC finset.v
   P : pred I
   F : I -> {set T}
   ============================
-  reflect (forall i : I, P i -> F i \subset U)
+  reflect (forall i : I, P i -> pred_of_set (F i) \subset U)
     (\bigcup_(i | P i) F i \subset U)
 1 subgoal
   
@@ -16258,7 +16321,7 @@ COQC finset.v
   P : pred I
   F : I -> {set T}
   ============================
-  (forall i : I, P i -> [disjoint U & F i]) ->
+  (forall i : I, P i -> [disjoint U & pred_of_set (F i)]) ->
   [disjoint U & \bigcup_(i | P i) F i]
 1 subgoal
   
@@ -16267,7 +16330,7 @@ COQC finset.v
   F : I -> {set T}
   ============================
   \bigcup_(i in (A :|: B)) F i =
-  \bigcup_(i in A) F i :|: \bigcup_(i in B) F i
+  \bigcup_(i in pred_of_set A) F i :|: \bigcup_(i in pred_of_set B) F i
 1 subgoal
   
   T, I : finType
@@ -16282,7 +16345,7 @@ COQC finset.v
   P : pred I
   F : I -> {set T}
   ============================
-  P j -> \bigcap_(i | P i) F i \subset F j
+  P j -> \bigcap_(i | P i) F i \subset pred_of_set (F j)
 1 subgoal
   
   T, I : finType
@@ -16291,7 +16354,7 @@ COQC finset.v
   P : pred I
   F : I -> {set T}
   ============================
-  P j -> F j \subset U -> \bigcap_(i | P i) F i \subset U
+  P j -> pred_of_set (F j) \subset U -> \bigcap_(i | P i) F i \subset U
 1 subgoal
   
   T, I : finType
@@ -16299,7 +16362,7 @@ COQC finset.v
   P : pred I
   F : I -> {set T}
   ============================
-  reflect (forall i : I, P i -> U \subset F i)
+  reflect (forall i : I, P i -> U \subset pred_of_set (F i))
     (U \subset \bigcap_(i | P i) F i)
 1 subgoal
   
@@ -16308,7 +16371,8 @@ COQC finset.v
   P : pred I
   F : I -> {set T}
   ============================
-  reflect (forall i : I, P i -> x \in F i) (x \in \bigcap_(i | P i) F i)
+  reflect (forall i : I, P i -> x \in pred_of_set (F i))
+    (x \in \bigcap_(i | P i) F i)
 1 subgoal
   
   T, I : finType
@@ -16334,7 +16398,7 @@ COQC finset.v
   F : I -> {set T}
   ============================
   \bigcap_(i in (A :|: B)) F i =
-  \bigcap_(i in A) F i :&: \bigcap_(i in B) F i
+  \bigcap_(i in pred_of_set A) F i :&: \bigcap_(i in pred_of_set B) F i
 1 subgoal
   
   T, I : finType
@@ -16351,7 +16415,8 @@ COQC finset.v
   D1 : pred aT1
   D2 : pred aT2
   ============================
-  [set f x y | x in A1, y in A2] = [set prod_curry f x | x in setX A1 A2]
+  [set f x y | x in pred_of_set A1, y in pred_of_set A2] =
+  [set prod_curry f x | x in pred_of_set (setX A1 A2)]
 1 subgoal
   
   aT1, aT2, rT : finType
@@ -16379,8 +16444,9 @@ COQC finset.v
   A, B : {set aT1}
   C : {set aT2}
   ============================
-  [set f x y | x in A :|: B, y in C] =
-  [set f x y | x in A, y in C] :|: [set f x y | x in B, y in C]
+  [set f x y | x in A :|: B, y in pred_of_set C] =
+  [set f x y | x in pred_of_set A, y in pred_of_set C]
+  :|: [set f x y | x in pred_of_set B, y in pred_of_set C]
 1 subgoal
   
   aT1, aT2, rT : finType
@@ -16388,33 +16454,38 @@ COQC finset.v
   A : {set aT1}
   B, C : {set aT2}
   ============================
-  [set f x y | x in A, y in B :|: C] =
-  [set f x y | x in A, y in B] :|: [set f x y | x in A, y in C]
+  [set f x y | x in pred_of_set A, y in B :|: C] =
+  [set f x y | x in pred_of_set A, y in pred_of_set B]
+  :|: [set f x y | x in pred_of_set A, y in pred_of_set C]
 1 subgoal
   
   T, I : finType
   A, B : {set T}
   ============================
-  #|A :|: B| <= #|A| + #|B| ?= iff [disjoint A & B]
+  #|A :|: B| <= #|pred_of_set A| + #|pred_of_set B|
+             ?= iff [disjoint pred_of_set A & pred_of_set B]
 1 subgoal
   
   T, I : finType
   P : {set {set T}}
   ============================
-  #|cover P| <= \sum_(A in P) #|A| ?= iff trivIset P
+  #|pred_of_set (cover P)| <= \sum_(A in pred_of_set P) #|pred_of_set A|
+                           ?= iff trivIset P
 1 subgoal
   
   T, I : finType
   P : {set {set T}}
   ============================
-  reflect {in P &, forall A B : {set T}, A != B -> [disjoint A & B]}
+  reflect
+    {in pred_of_set P &, forall A B : {set T},
+                         A != B -> [disjoint pred_of_set A & pred_of_set B]}
     (trivIset P)
 1 subgoal
   
   T, I : finType
   P, Q : {set {set T}}
   ============================
-  P \subset Q -> trivIset Q -> trivIset P
+  pred_of_set P \subset pred_of_set Q -> trivIset Q -> trivIset P
 1 subgoal
   
   T, I : finType
@@ -16428,21 +16499,21 @@ COQC finset.v
   P : {set {set T}}
   D : {set T}
   ============================
-  cover (P ::&: D) \subset cover P :&: D
+  pred_of_set (cover (P ::&: D)) \subset cover P :&: D
 1 subgoal
   
   T, I : finType
   P : {set {set T}}
   x : T
   ============================
-  (x \in pblock P x) = (x \in cover P)
+  (x \in pred_of_set (pblock P x)) = (x \in pred_of_set (cover P))
 1 subgoal
   
   T, I : finType
   P : {set {set T}}
   x : T
   ============================
-  x \in cover P -> pblock P x \in P
+  x \in pred_of_set (cover P) -> pblock P x \in pred_of_set P
 1 subgoal
   
   T, I : finType
@@ -16450,14 +16521,14 @@ COQC finset.v
   B : {set T}
   x : T
   ============================
-  trivIset P -> B \in P -> x \in B -> pblock P x = B
+  trivIset P -> B \in pred_of_set P -> x \in pred_of_set B -> pblock P x = B
 1 subgoal
   
   T, I : finType
   P : {set {set T}}
   x, y : T
   ============================
-  trivIset P -> x \in pblock P y -> pblock P x = pblock P y
+  trivIset P -> x \in pred_of_set (pblock P y) -> pblock P x = pblock P y
 1 subgoal
   
   T, I : finType
@@ -16465,15 +16536,18 @@ COQC finset.v
   x, y : T
   ============================
   trivIset P ->
-  x \in cover P -> (pblock P x == pblock P y) = (y \in pblock P x)
+  x \in pred_of_set (cover P) ->
+  (pblock P x == pblock P y) = (y \in pred_of_set (pblock P x))
 1 subgoal
   
   T, I : finType
   A : {set T}
   P : {set {set T}}
   ============================
-  {in P, forall B : {set T}, [disjoint A & B]} ->
-  trivIset P -> set0 \notin P -> trivIset (A |: P) /\ A \notin P
+  {in pred_of_set P, forall B : {set T},
+                     [disjoint pred_of_set A & pred_of_set B]} ->
+  trivIset P ->
+  set0 \notin pred_of_set P -> trivIset (A |: P) /\ A \notin pred_of_set P
 1 subgoal
   
   T, I : finType
@@ -16488,8 +16562,9 @@ COQC finset.v
   F : I -> {set T}
   P := [set F x | x in J] : {set set_of_finType T}
   ============================
-  {in J &, forall i j : I, j != i -> [disjoint F i & F j]} ->
-  set0 \notin P -> trivIset P /\ {in J &, injective F}
+  {in J &, forall i j : I,
+           j != i -> [disjoint pred_of_set (F i) & pred_of_set (F j)]} ->
+  set0 \notin pred_of_set P -> trivIset P /\ {in J &, injective F}
 1 subgoal
   
   T, I : finType
@@ -16503,7 +16578,8 @@ COQC finset.v
   P : {set {set T}}
   D : {set T}
   ============================
-  partition P D -> #|D| = \sum_(A in P) #|A|
+  partition P D ->
+  #|pred_of_set D| = \sum_(A in pred_of_set P) #|pred_of_set A|
 1 subgoal
   
   T, I : finType
@@ -16511,7 +16587,8 @@ COQC finset.v
   P : {set {set T}}
   D : {set T}
   ============================
-  {in P, forall A : {set T}, #|A| = n} -> partition P D -> #|D| = #|P| * n
+  {in pred_of_set P, forall A : {set T}, #|pred_of_set A| = n} ->
+  partition P D -> #|pred_of_set D| = #|pred_of_set P| * n
 1 subgoal
   
   T, I : finType
@@ -16519,16 +16596,19 @@ COQC finset.v
   idx : R
   op : Monoid.com_law idx
   rhs_cond := fun (P : {set {set T}}) (K : T -> bool) (E : T -> R) =>
-              \big[op/idx]_(A in P) \big[op/idx]_(x in A | K x) E x
+              \big[op/idx]_(A in pred_of_set P)
+                 \big[op/idx]_(x in pred_of_set A | K x) E x
    : {set {set T}} -> (T -> bool) -> (T -> R) -> R
   rhs := fun (P : {set {set T}}) (E : T -> R) =>
-         \big[op/idx]_(A in P) \big[op/idx]_(x in A) E x
+         \big[op/idx]_(A in pred_of_set P)
+            \big[op/idx]_(x in pred_of_set A) E x
    : {set {set T}} -> (T -> R) -> R
   P : {set {set T}}
   K : pred T
   E : T -> R
   ============================
-  trivIset P -> \big[op/idx]_(x in cover P | K x) E x = rhs_cond P K E
+  trivIset P ->
+  \big[op/idx]_(x in pred_of_set (cover P) | K x) E x = rhs_cond P K E
 1 subgoal
   
   T, I : finType
@@ -16536,15 +16616,17 @@ COQC finset.v
   idx : R
   op : Monoid.com_law idx
   rhs_cond := fun (P : {set {set T}}) (K : T -> bool) (E : T -> R) =>
-              \big[op/idx]_(A in P) \big[op/idx]_(x in A | K x) E x
+              \big[op/idx]_(A in pred_of_set P)
+                 \big[op/idx]_(x in pred_of_set A | K x) E x
    : {set {set T}} -> (T -> bool) -> (T -> R) -> R
   rhs := fun (P : {set {set T}}) (E : T -> R) =>
-         \big[op/idx]_(A in P) \big[op/idx]_(x in A) E x
+         \big[op/idx]_(A in pred_of_set P)
+            \big[op/idx]_(x in pred_of_set A) E x
    : {set {set T}} -> (T -> R) -> R
   P : {set {set T}}
   E : T -> R
   ============================
-  trivIset P -> \big[op/idx]_(x in cover P) E x = rhs P E
+  trivIset P -> \big[op/idx]_(x in pred_of_set (cover P)) E x = rhs P E
 1 subgoal
   
   T, I : finType
@@ -16552,17 +16634,20 @@ COQC finset.v
   idx : R
   op : Monoid.com_law idx
   rhs_cond := fun (P : {set {set T}}) (K : T -> bool) (E : T -> R) =>
-              \big[op/idx]_(A in P) \big[op/idx]_(x in A | K x) E x
+              \big[op/idx]_(A in pred_of_set P)
+                 \big[op/idx]_(x in pred_of_set A | K x) E x
    : {set {set T}} -> (T -> bool) -> (T -> R) -> R
   rhs := fun (P : {set {set T}}) (E : T -> R) =>
-         \big[op/idx]_(A in P) \big[op/idx]_(x in A) E x
+         \big[op/idx]_(A in pred_of_set P)
+            \big[op/idx]_(x in pred_of_set A) E x
    : {set {set T}} -> (T -> R) -> R
   P : {set {set T}}
   D : {set T}
   K : pred T
   E : T -> R
   ============================
-  partition P D -> \big[op/idx]_(x in D | K x) E x = rhs_cond P K E
+  partition P D ->
+  \big[op/idx]_(x in pred_of_set D | K x) E x = rhs_cond P K E
 1 subgoal
   
   T, I : finType
@@ -16570,16 +16655,18 @@ COQC finset.v
   idx : R
   op : Monoid.com_law idx
   rhs_cond := fun (P : {set {set T}}) (K : T -> bool) (E : T -> R) =>
-              \big[op/idx]_(A in P) \big[op/idx]_(x in A | K x) E x
+              \big[op/idx]_(A in pred_of_set P)
+                 \big[op/idx]_(x in pred_of_set A | K x) E x
    : {set {set T}} -> (T -> bool) -> (T -> R) -> R
   rhs := fun (P : {set {set T}}) (E : T -> R) =>
-         \big[op/idx]_(A in P) \big[op/idx]_(x in A) E x
+         \big[op/idx]_(A in pred_of_set P)
+            \big[op/idx]_(x in pred_of_set A) E x
    : {set {set T}} -> (T -> R) -> R
   P : {set {set T}}
   D : {set T}
   E : T -> R
   ============================
-  partition P D -> \big[op/idx]_(x in D) E x = rhs P E
+  partition P D -> \big[op/idx]_(x in pred_of_set D) E x = rhs P E
 1 subgoal
   
   T, I : finType
@@ -16587,37 +16674,39 @@ COQC finset.v
   idx : R
   op : Monoid.com_law idx
   rhs_cond := fun (P : {set {set T}}) (K : T -> bool) (E : T -> R) =>
-              \big[op/idx]_(A in P) \big[op/idx]_(x in A | K x) E x
+              \big[op/idx]_(A in pred_of_set P)
+                 \big[op/idx]_(x in pred_of_set A | K x) E x
    : {set {set T}} -> (T -> bool) -> (T -> R) -> R
   rhs := fun (P : {set {set T}}) (E : T -> R) =>
-         \big[op/idx]_(A in P) \big[op/idx]_(x in A) E x
+         \big[op/idx]_(A in pred_of_set P)
+            \big[op/idx]_(x in pred_of_set A) E x
    : {set {set T}} -> (T -> R) -> R
   F : I -> {set T}
   E : T -> R
   ============================
-  (forall i j : I, i != j -> [disjoint F i & F j]) ->
+  (forall i j : I, i != j -> [disjoint pred_of_set (F i) & pred_of_set (F j)]) ->
   \big[op/idx]_(x in \bigcup_i F i) E x =
-  \big[op/idx]_i \big[op/idx]_(x in F i) E x
+  \big[op/idx]_i \big[op/idx]_(x in pred_of_set (F i)) E x
 1 subgoal
   
   T, I : finType
   R : rel T
   D : {set T}
-  Px := fun x : T => [set y in D | R x y] : T -> {set T}
-  eqiR : {in D & &, equivalence_rel R}
+  Px := fun x : T => [set y in pred_of_set D | R x y] : T -> {set T}
+  eqiR : {in pred_of_set D & &, equivalence_rel R}
   x : T
   ============================
-  x \in D -> x \in Px x
+  x \in pred_of_set D -> x \in pred_of_set (Px x)
 1 subgoal
   
   T, I : finType
   R : rel T
   D : {set T}
-  Px := fun x : T => [set y in D | R x y] : T -> {set T}
-  eqiR : {in D & &, equivalence_rel R}
-  Pxx : forall x : T, x \in D -> x \in Px x
+  Px := fun x : T => [set y in pred_of_set D | R x y] : T -> {set T}
+  eqiR : {in pred_of_set D & &, equivalence_rel R}
+  Pxx : forall x : T, x \in pred_of_set D -> x \in pred_of_set (Px x)
   PPx := fun x : T => [eta mem_imset Px (x:=x)]
-   : forall x : T, x \in D -> Px x \in P
+   : forall x : T, x \in pred_of_set D -> Px x \in P
   ============================
   partition P D
 1 subgoal
@@ -16625,13 +16714,14 @@ COQC finset.v
   T, I : finType
   R : rel T
   D : {set T}
-  Px := fun x : T => [set y in D | R x y] : T -> {set T}
-  eqiR : {in D & &, equivalence_rel R}
-  Pxx : forall x : T, x \in D -> x \in Px x
+  Px := fun x : T => [set y in pred_of_set D | R x y] : T -> {set T}
+  eqiR : {in pred_of_set D & &, equivalence_rel R}
+  Pxx : forall x : T, x \in pred_of_set D -> x \in pred_of_set (Px x)
   PPx := fun x : T => [eta mem_imset Px (x:=x)]
-   : forall x : T, x \in D -> Px x \in P
+   : forall x : T, x \in pred_of_set D -> Px x \in P
   ============================
-  {in D &, forall x y : T, (y \in pblock P x) = R x y}
+  {in pred_of_set D &, forall x y : T,
+                       (y \in pred_of_set (pblock P x)) = R x y}
 1 subgoal
   
   T, I : finType
@@ -16639,8 +16729,9 @@ COQC finset.v
   D : {set T}
   ============================
   partition P D ->
-  {in D & &, equivalence_rel
-               (fun x : T => (in_mem (T:=T))^~ (mem (pblock P x)))}
+  {in pred_of_set D & &, equivalence_rel
+                           (fun x : T =>
+                            (in_mem (T:=T))^~ (mem (pred_of_set (pblock P x))))}
 1 subgoal
   
   T, I : finType
@@ -16648,8 +16739,8 @@ COQC finset.v
   D : {set T}
   ============================
   partition P D ->
-  equivalence_partition (fun x : T => (in_mem (T:=T))^~ (mem (pblock P x))) D =
-  P
+  equivalence_partition
+    (fun x : T => (in_mem (T:=T))^~ (mem (pred_of_set (pblock P x)))) D = P
 1 subgoal
   
   T, I : finType
@@ -16680,7 +16771,7 @@ COQC finset.v
   D : {set T}
   trPX : is_transversal X P D
   ============================
-  X \subset D
+  pred_of_set X \subset pred_of_set D
 1 subgoal
   
   T, I : finType
@@ -16699,7 +16790,7 @@ COQC finset.v
   trPX : is_transversal X P D
   tiP : trivIset P
   ============================
-  {subset X <= cover P}
+  {subset pred_of_set X <= pred_of_set (cover P)}
 1 subgoal
   
   T, I : finType
@@ -16708,9 +16799,9 @@ COQC finset.v
   D : {set T}
   trPX : is_transversal X P D
   tiP : trivIset P
-  sXP : {subset X <= cover P}
+  sXP : {subset pred_of_set X <= pred_of_set (cover P)}
   ============================
-  {in P, forall B : {set T}, #|X :&: B| == 1}
+  {in pred_of_set P, forall B : {set T}, #|X :&: B| == 1}
 1 subgoal
   
   T, I : finType
@@ -16719,12 +16810,12 @@ COQC finset.v
   D : {set T}
   trPX : is_transversal X P D
   tiP : trivIset P
-  sXP : {subset X <= cover P}
-  trX : {in P, forall B : {set T}, #|X :&: B| == 1}
+  sXP : {subset pred_of_set X <= pred_of_set (cover P)}
+  trX : {in pred_of_set P, forall B : {set T}, #|X :&: B| == 1}
   x0 : T
   B : {set T}
   ============================
-  B \in P -> X :&: B = [set transversal_repr x0 X B]
+  B \in pred_of_set P -> X :&: B = [set transversal_repr x0 X B]
 1 subgoal
   
   T, I : finType
@@ -16733,12 +16824,12 @@ COQC finset.v
   D : {set T}
   trPX : is_transversal X P D
   tiP : trivIset P
-  sXP : {subset X <= cover P}
-  trX : {in P, forall B : {set T}, #|X :&: B| == 1}
+  sXP : {subset pred_of_set X <= pred_of_set (cover P)}
+  trX : {in pred_of_set P, forall B : {set T}, #|X :&: B| == 1}
   x0 : T
   B : {set T}
   ============================
-  B \in P -> transversal_repr x0 X B \in B
+  B \in pred_of_set P -> transversal_repr x0 X B \in pred_of_set B
 1 subgoal
   
   T, I : finType
@@ -16747,12 +16838,12 @@ COQC finset.v
   D : {set T}
   trPX : is_transversal X P D
   tiP : trivIset P
-  sXP : {subset X <= cover P}
-  trX : {in P, forall B : {set T}, #|X :&: B| == 1}
+  sXP : {subset pred_of_set X <= pred_of_set (cover P)}
+  trX : {in pred_of_set P, forall B : {set T}, #|X :&: B| == 1}
   x0 : T
   B : {set T}
   ============================
-  B \in P -> transversal_repr x0 X B \in X
+  B \in pred_of_set P -> transversal_repr x0 X B \in pred_of_set X
 1 subgoal
   
   T, I : finType
@@ -16761,11 +16852,11 @@ COQC finset.v
   D : {set T}
   trPX : is_transversal X P D
   tiP : trivIset P
-  sXP : {subset X <= cover P}
-  trX : {in P, forall B : {set T}, #|X :&: B| == 1}
+  sXP : {subset pred_of_set X <= pred_of_set (cover P)}
+  trX : {in pred_of_set P, forall B : {set T}, #|X :&: B| == 1}
   x0 : T
   ============================
-  {in P, cancel (transversal_repr x0 X) (pblock P)}
+  {in pred_of_set P, cancel (transversal_repr x0 X) (pblock P)}
 1 subgoal
   
   T, I : finType
@@ -16774,11 +16865,11 @@ COQC finset.v
   D : {set T}
   trPX : is_transversal X P D
   tiP : trivIset P
-  sXP : {subset X <= cover P}
-  trX : {in P, forall B : {set T}, #|X :&: B| == 1}
+  sXP : {subset pred_of_set X <= pred_of_set (cover P)}
+  trX : {in pred_of_set P, forall B : {set T}, #|X :&: B| == 1}
   x0 : T
   ============================
-  {in X, cancel (pblock P) (transversal_repr x0 X)}
+  {in pred_of_set X, cancel (pblock P) (transversal_repr x0 X)}
 1 subgoal
   
   T, I : finType
@@ -16787,10 +16878,10 @@ COQC finset.v
   D : {set T}
   trPX : is_transversal X P D
   tiP : trivIset P
-  sXP : {subset X <= cover P}
-  trX : {in P, forall B : {set T}, #|X :&: B| == 1}
+  sXP : {subset pred_of_set X <= pred_of_set (cover P)}
+  trX : {in pred_of_set P, forall B : {set T}, #|X :&: B| == 1}
   ============================
-  {in X &, injective (pblock P)}
+  {in pred_of_set X &, injective (pblock P)}
 1 subgoal
   
   T, I : finType
@@ -16799,10 +16890,10 @@ COQC finset.v
   D : {set T}
   trPX : is_transversal X P D
   tiP : trivIset P
-  sXP : {subset X <= cover P}
-  trX : {in P, forall B : {set T}, #|X :&: B| == 1}
+  sXP : {subset pred_of_set X <= pred_of_set (cover P)}
+  trX : {in pred_of_set P, forall B : {set T}, #|X :&: B| == 1}
   ============================
-  [set pblock P x | x in X] = P
+  [set pblock P x | x in pred_of_set X] = P
 1 subgoal
   
   T, I : finType
@@ -16811,10 +16902,10 @@ COQC finset.v
   D : {set T}
   trPX : is_transversal X P D
   tiP : trivIset P
-  sXP : {subset X <= cover P}
-  trX : {in P, forall B : {set T}, #|X :&: B| == 1}
+  sXP : {subset pred_of_set X <= pred_of_set (cover P)}
+  trX : {in pred_of_set P, forall B : {set T}, #|X :&: B| == 1}
   ============================
-  #|X| = #|P|
+  #|pred_of_set X| = #|pred_of_set P|
 1 subgoal
   
   T, I : finType
@@ -16823,11 +16914,11 @@ COQC finset.v
   D : {set T}
   trPX : is_transversal X P D
   tiP : trivIset P
-  sXP : {subset X <= cover P}
-  trX : {in P, forall B : {set T}, #|X :&: B| == 1}
+  sXP : {subset pred_of_set X <= pred_of_set (cover P)}
+  trX : {in pred_of_set P, forall B : {set T}, #|X :&: B| == 1}
   x0 : T
   ============================
-  [set transversal_repr x0 X x | x in P] = X
+  [set transversal_repr x0 X x | x in pred_of_set P] = X
 1 subgoal
   
   T : finType
@@ -16837,7 +16928,8 @@ COQC finset.v
   ============================
   partition P D ->
   partition Q P ->
-  partition [set cover x | x in Q] D /\ {in Q &, injective cover}
+  partition [set cover x | x in pred_of_set Q] D /\
+  {in pred_of_set Q &, injective cover}
 1 subgoal
   
   T : finType
@@ -16851,7 +16943,9 @@ COQC finset.v
   P : pred {set T}
   A : {set T}
   ============================
-  reflect (P A /\ (forall B : {set T}, P B -> B \subset A -> B = A))
+  reflect
+    (P A /\
+     (forall B : {set T}, P B -> pred_of_set B \subset pred_of_set A -> B = A))
     (minset P A)
 1 subgoal
   
@@ -16866,7 +16960,7 @@ COQC finset.v
   P : pred {set T}
   A, B : {set T}
   ============================
-  minset P A -> P B -> B \subset A -> B = A
+  minset P A -> P B -> pred_of_set B \subset pred_of_set A -> B = A
 1 subgoal
   
   T : finType
@@ -16879,7 +16973,7 @@ COQC finset.v
   P : pred {set T}
   C : {set T}
   ============================
-  P C -> {A : {set T} | minset P A & A \subset C}
+  P C -> {A : {set T} | minset P A & pred_of_set A \subset pred_of_set C}
 1 subgoal
   
   T : finType
@@ -16912,7 +17006,9 @@ COQC finset.v
   P : pred {set T}
   A : {set T}
   ============================
-  reflect (P A /\ (forall B : {set T}, P B -> A \subset B -> B = A))
+  reflect
+    (P A /\
+     (forall B : {set T}, P B -> pred_of_set A \subset pred_of_set B -> B = A))
     (maxset P A)
 1 subgoal
   
@@ -16927,7 +17023,7 @@ COQC finset.v
   P : pred {set T}
   A, B : {set T}
   ============================
-  maxset P A -> P B -> A \subset B -> B = A
+  maxset P A -> P B -> pred_of_set A \subset pred_of_set B -> B = A
 1 subgoal
   
   T : finType
@@ -16940,7 +17036,7 @@ COQC finset.v
   P : pred {set T}
   C : {set T}
   ============================
-  P C -> {A : {set T} | maxset P A & C \subset A}
+  P C -> {A : {set T} | maxset P A & pred_of_set C \subset pred_of_set A}
 COQC binomial.v
 1 subgoal
   
@@ -17181,25 +17277,26 @@ COQC binomial.v
   D, T : finType
   R : pred T
   ============================
-  #|[set f in ffun_on R | injectiveb f]| = #|R| ^_ #|D|
+  #|[set f in ffun_on R | injectiveb (fun_of_fin f)]| = #|R| ^_ #|D|
 1 subgoal
   
   D, T : finType
   ============================
-  #|[set f | injectiveb f]| = #|T| ^_ #|D|
+  #|[set f | injectiveb (fun_of_fin f)]| = #|T| ^_ #|D|
 1 subgoal
   
   T : finType
   B : {set T}
   k : nat_eqType
   ============================
-  #|[set A | A \subset B & #|A| == k]| = 'C(#|B|, k)
+  #|[set A | pred_of_set A \subset pred_of_set B & 
+  #|pred_of_set A| == k]| = 'C(#|pred_of_set B|, k)
 1 subgoal
   
   T : finType
   k : nat_eqType
   ============================
-  #|[set A | #|A| == k]| = 'C(#|T|, k)
+  #|[set A | #|pred_of_set A| == k]| = 'C(#|T|, k)
 1 subgoal
   
   m, n : nat
